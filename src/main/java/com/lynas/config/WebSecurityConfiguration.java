@@ -1,4 +1,4 @@
-package com.lynas.configuration;
+package com.lynas.config;
 
 import com.lynas.security.AuthenticationTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;

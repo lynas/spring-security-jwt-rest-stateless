@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProtectedController {
 
     @RequestMapping(method = RequestMethod.GET)
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<?> getDaHoney() {
         return ResponseEntity.ok("{\"success\":true}");
     }

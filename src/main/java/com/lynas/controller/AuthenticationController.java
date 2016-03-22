@@ -41,7 +41,8 @@ public class AuthenticationController {
     private UserDetailsService userDetailsService;
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<?> authenticationRequest(@RequestBody AuthenticationRequest authenticationRequest) throws AuthenticationException {
+    public ResponseEntity<?> authenticationRequest(@RequestBody AuthenticationRequest authenticationRequest)
+            throws AuthenticationException {
 
         // Perform the authentication
         Authentication authentication = this.authenticationManager.authenticate(
