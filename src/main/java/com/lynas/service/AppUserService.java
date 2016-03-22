@@ -3,10 +3,8 @@ package com.lynas.service;
 import com.lynas.model.AppUser;
 
 /**
- * Created by sazzad on 2/11/16.
+ * Created by LynAs on 20-Mar-16
  */
 public interface AppUserService {
-    void insertAppUser(AppUser appUser);
-
-    AppUser getUserByUserName(String userName);
+    AppUser loadUserByUsername(String username);
 }

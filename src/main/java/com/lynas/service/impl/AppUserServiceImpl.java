@@ -8,27 +8,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * Created by sazzad on 2/11/16.
- */
-@Service
+
+@Service(value = "appUserService")
 public class AppUserServiceImpl implements AppUserService {
 
     @Autowired
     private SessionFactory sessionFactory;
 
-    @Transactional
-    public void insertAppUser(AppUser appUser) {
-        sessionFactory
-                .getCurrentSession()
-                .save(appUser);
-    }
 
+    @Override
     @Transactional
-    public AppUser getUserByUserName(String userName) {
+    public AppUser loadUserByUsername(String username) {
         return (AppUser) sessionFactory.getCurrentSession()
                 .createCriteria(AppUser.class)
-                .add(Restrictions.eq("userName", userName))
+                .add(Restrictions.eq("username", username))
                 .uniqueResult();
     }
 }

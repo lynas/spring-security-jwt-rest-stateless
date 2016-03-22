@@ -1,7 +1,10 @@
 package com.lynas.config;
 
+import com.lynas.security.AuthenticationTokenFilter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
+import javax.servlet.Filter;
 
 /**
  * Created by LynAs on 23-Jan-16
@@ -21,6 +24,13 @@ public class WebAppInit extends AbstractAnnotationConfigDispatcherServletInitial
     @Override
     protected String[] getServletMappings() {
         return new String[]{"/"};
+    }
+
+    @Override
+    protected Filter[] getServletFilters() {
+        return new Filter[]{
+                new AuthenticationTokenFilter()
+        };
     }
 
 }

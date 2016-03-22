@@ -19,9 +19,7 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 public class DatabaseConfig {
-    /*
-    * create database
-    * create database inventory_management; */
+
     @Autowired
     private ApplicationContext appContext;
 
@@ -47,7 +45,7 @@ public class DatabaseConfig {
         return manager;
     }
 
-    @Bean
+    @Bean(name = "sessionFactory")
     public LocalSessionFactoryBean hibernate5SessionFactoryBean(){
         LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
         localSessionFactoryBean.setDataSource((DataSource) appContext.getBean("DataSource"));

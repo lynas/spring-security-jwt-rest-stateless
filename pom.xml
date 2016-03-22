@@ -36,6 +36,7 @@
         <spring>4.2.5.RELEASE</spring>
         <spring-sec>4.0.4.RELEASE</spring-sec>
         <jjwt.version>0.6.0</jjwt.version>
+        <apache-commons.version>3.0</apache-commons.version>
     </properties>
 
     <dependencies>
@@ -122,6 +123,26 @@
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>
             <scope>provided</scope><!--provided by the container-->
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${apache-commons.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.7.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.7.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.7.3</version>
         </dependency>
 
 
