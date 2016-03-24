@@ -1,11 +1,11 @@
-package com.lynas.controller;
+package com.lynas.security.controller;
 
-import com.lynas.model.json.request.AuthenticationRequest;
-import com.lynas.model.json.response.AuthenticationResponse;
-import com.lynas.model.security.SpringSecurityUser;
+import com.lynas.AppConstant;
 import com.lynas.security.TokenUtils;
+import com.lynas.security.model.AuthenticationRequest;
+import com.lynas.security.model.AuthenticationResponse;
+import com.lynas.security.model.SpringSecurityUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,14 +25,8 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("auth")
 public class AuthenticationController {
 
-
-    private String tokenHeader = "X-Auth-Token";
-
     @Autowired
     private AuthenticationManager authenticationManager;
-
-    @Autowired
-    ApplicationContext context;
 
     @Autowired
     private TokenUtils tokenUtils;
@@ -63,7 +57,7 @@ public class AuthenticationController {
 
     @RequestMapping(value = "refresh", method = RequestMethod.GET)
     public ResponseEntity<?> authenticationRequest(HttpServletRequest request) {
-        String token = request.getHeader(this.tokenHeader);
+        String token = request.getHeader(AppConstant.tokenHeader);
         String username = this.tokenUtils.getUsernameFromToken(token);
         SpringSecurityUser user = (SpringSecurityUser) this.userDetailsService.loadUserByUsername(username);
         if (this.tokenUtils.canTokenBeRefreshed(token, user.getLastPasswordReset())) {

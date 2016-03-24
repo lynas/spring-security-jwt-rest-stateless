@@ -1,7 +1,7 @@
-package com.lynas.service.impl;
+package com.lynas.security.service;
 
 import com.lynas.model.AppUser;
-import com.lynas.model.security.SpringSecurityUser;
+import com.lynas.security.model.SpringSecurityUser;
 import com.lynas.service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -27,8 +27,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                     appUser.getId(),
                     appUser.getUsername(),
                     appUser.getPassword(),
-                    appUser.getEmail(),
-                    appUser.getLastPasswordReset(),
+                    null,
+                    null,
                     AuthorityUtils.commaSeparatedStringToAuthorityList(appUser.getAuthorities())
             );
         }

@@ -1,48 +1,31 @@
 package com.lynas.model;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
-@Table(name = "appuser")
 public class AppUser {
 
     @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "username", unique = true, nullable = false)
     private String username;
     @Column(name = "password", nullable = false)
     private String password;
-    @Column(name = "email")
-    private String email;
-    @Column(name = "last_password_reset")
-    private Date lastPasswordReset;
     @Column(name = "authorities")
     private String authorities;
 
     public AppUser() {
-        super();
     }
 
-    @Override
-    public String toString() {
-        return ReflectionToStringBuilder.toString(this);
-    }
-
-    public AppUser(String username, String password, String email, Date lastPasswordReset, String authorities) {
-        this.setUsername(username);
-        this.setPassword(password);
-        this.setEmail(email);
-        this.setLastPasswordReset(lastPasswordReset);
-        this.setAuthorities(authorities);
+    public AppUser(String username, String password, String authorities) {
+        this.username = username;
+        this.password = password;
+        this.authorities = authorities;
     }
 
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Long id) {
@@ -50,7 +33,7 @@ public class AppUser {
     }
 
     public String getUsername() {
-        return this.username;
+        return username;
     }
 
     public void setUsername(String username) {
@@ -58,35 +41,18 @@ public class AppUser {
     }
 
     public String getPassword() {
-        return this.password;
+        return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public String getEmail() {
-        return this.email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Date getLastPasswordReset() {
-        return this.lastPasswordReset;
-    }
-
-    public void setLastPasswordReset(Date lastPasswordReset) {
-        this.lastPasswordReset = lastPasswordReset;
-    }
-
     public String getAuthorities() {
-        return this.authorities;
+        return authorities;
     }
 
     public void setAuthorities(String authorities) {
         this.authorities = authorities;
     }
-
 }

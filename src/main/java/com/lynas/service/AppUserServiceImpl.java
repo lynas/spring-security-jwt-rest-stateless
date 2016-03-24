@@ -1,7 +1,6 @@
-package com.lynas.service.impl;
+package com.lynas.service;
 
 import com.lynas.model.AppUser;
-import com.lynas.service.AppUserService;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +22,31 @@ public class AppUserServiceImpl implements AppUserService {
                 .createCriteria(AppUser.class)
                 .add(Restrictions.eq("username", username))
                 .uniqueResult();
+    }
+
+    @Transactional
+    @Override
+    public long post(AppUser appUser) {
+        return (long) sessionFactory.getCurrentSession().save(appUser);
+    }
+
+    @Transactional
+    @Override
+    public AppUser get(long id) {
+        return sessionFactory.getCurrentSession().get(AppUser.class, id);
+    }
+
+    @Transactional
+    @Override
+    public AppUser patch(AppUser appUser) {
+        sessionFactory.getCurrentSession().update(appUser);
+        return get(appUser.getId());
+    }
+
+    @Transactional
+    @Override
+    public boolean delete(long id) {
+        sessionFactory.getCurrentSession().delete(get(id));
+        return true;
     }
 }

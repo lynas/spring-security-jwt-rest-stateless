@@ -1,10 +1,8 @@
-package com.lynas.model.json.response;
+package com.lynas.security.model;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 public class AuthenticationResponse {
 
-	private static final long serialVersionUID = -6624726180748515507L;
 	private String token;
 
 	public AuthenticationResponse() {
@@ -21,11 +19,6 @@ public class AuthenticationResponse {
 
 	public void setToken(String token) {
 		this.token = token;
-	}
-
-	@Override
-	public String toString() {
-		return ReflectionToStringBuilder.toString(this);
 	}
 
 }

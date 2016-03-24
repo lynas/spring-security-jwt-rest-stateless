@@ -25,11 +25,11 @@ public class DatabaseConfig {
 
 
 
-    @Bean(name = "DataSource")
+    @Bean
     public HikariDataSource getDataSource(){
         HikariDataSource dataSource = new HikariDataSource();
         dataSource.setDataSourceClassName("com.mysql.jdbc.jdbc2.optional.MysqlDataSource");
-        dataSource.addDataSourceProperty("databaseName", "springrest");
+        dataSource.addDataSourceProperty("databaseName", "demorest");
         dataSource.addDataSourceProperty("portNumber", "3306");
         dataSource.addDataSourceProperty("serverName", "127.0.0.1");
         dataSource.addDataSourceProperty("user", "root");
@@ -48,7 +48,7 @@ public class DatabaseConfig {
     @Bean(name = "sessionFactory")
     public LocalSessionFactoryBean hibernate5SessionFactoryBean(){
         LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
-        localSessionFactoryBean.setDataSource((DataSource) appContext.getBean("DataSource"));
+        localSessionFactoryBean.setDataSource(appContext.getBean(HikariDataSource.class));
         localSessionFactoryBean.setAnnotatedClasses(
                 AppUser.class
         );

@@ -1,4 +1,4 @@
-package com.lynas.service.impl;
+package com.lynas.security.service;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;

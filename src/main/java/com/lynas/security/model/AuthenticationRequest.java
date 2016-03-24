@@ -1,10 +1,8 @@
-package com.lynas.model.json.request;
+package com.lynas.security.model;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 public class AuthenticationRequest {
 
-    private static final long serialVersionUID = 6624726180748515507L;
     private String username;
     private String password;
 
@@ -32,11 +30,5 @@ public class AuthenticationRequest {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    @Override
-    public String toString() {
-        return ReflectionToStringBuilder.toString(this);
-    }
-
 
 }

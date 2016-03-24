@@ -1,4 +1,4 @@
-package com.lynas.controller;
+package com.lynas.security.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

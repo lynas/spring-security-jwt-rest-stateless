@@ -1,8 +1,7 @@
-package com.lynas.config;
+package com.lynas.security.config;
 
-import com.lynas.security.AuthenticationTokenFilter;
+import com.lynas.security.filter.AuthenticationTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -22,16 +21,18 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableTransactionManagement
-public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
+public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private ApplicationContext applicationContext;
+    private UserDetailsService userDetailsService;
+    @Autowired
+    private AuthenticationEntryPoint authenticationEntryPoint;
 
 
     @Autowired
     public void configureAuthentication(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder
-                .userDetailsService((UserDetailsService) applicationContext.getBean("userDetailsService"))
+                .userDetailsService(userDetailsService)
                 .passwordEncoder(new BCryptPasswordEncoder());
     }
 
@@ -50,7 +51,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
                 .csrf()
                 .disable()
                 .exceptionHandling()
-                .authenticationEntryPoint((AuthenticationEntryPoint) applicationContext.getBean("authenticationEntryPoint"))
+                .authenticationEntryPoint(authenticationEntryPoint)
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

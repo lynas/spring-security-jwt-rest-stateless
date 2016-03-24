@@ -1,6 +1,6 @@
 package com.lynas.security;
 
-import com.lynas.model.security.SpringSecurityUser;
+import com.lynas.security.model.SpringSecurityUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
