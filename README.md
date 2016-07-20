@@ -11,11 +11,20 @@ VALUES ('ROLE_ADMIN, ROLE_EM PLOYEE, ROLE_MANAGER', '$2a$10$aS/lF2c/9JWPUjDHfJ/z
 #make post call
 http://localhost:8080/auth
 with body
-{"username":"sazzad","password":"123456"}
+
+```
+{ 
+  "username" : "lynas",
+  "password" : "123456"
+}
+```
 you will get result
+
+```
 {
   "token": "sasdasdasd"
 }
+```
 
 #make get call with header X-Auth-Token
 
