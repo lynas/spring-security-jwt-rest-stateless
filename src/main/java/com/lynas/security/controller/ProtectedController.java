@@ -12,7 +12,7 @@ public class ProtectedController {
 
     @RequestMapping(method = RequestMethod.GET)
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    public ResponseEntity<?> getDaHoney() {
+    public ResponseEntity<?> hello() {
         return ResponseEntity.ok("{\"success\":true}");
     }
 

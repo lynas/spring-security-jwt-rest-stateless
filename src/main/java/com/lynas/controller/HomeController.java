@@ -20,7 +20,7 @@ public class HomeController {
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> home() {
-        AppUser appUser = appUserService.get(1);
+        AppUser appUser = appUserService.findById(1);
         return ResponseEntity.ok(appUser);
     }
 }

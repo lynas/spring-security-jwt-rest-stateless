@@ -15,9 +15,8 @@ public class AppUserServiceImpl implements AppUserService {
     private SessionFactory sessionFactory;
 
 
-    @Override
     @Transactional
-    public AppUser loadUserByUsername(String username) {
+    public AppUser findByUsername(String username) {
         return (AppUser) sessionFactory.getCurrentSession()
                 .createCriteria(AppUser.class)
                 .add(Restrictions.eq("username", username))
@@ -25,28 +24,24 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     @Transactional
-    @Override
-    public long post(AppUser appUser) {
+    public long create(AppUser appUser) {
         return (long) sessionFactory.getCurrentSession().save(appUser);
     }
 
     @Transactional
-    @Override
-    public AppUser get(long id) {
+    public AppUser findById(long id) {
         return sessionFactory.getCurrentSession().get(AppUser.class, id);
     }
 
     @Transactional
-    @Override
-    public AppUser patch(AppUser appUser) {
+    public AppUser update(AppUser appUser) {
         sessionFactory.getCurrentSession().update(appUser);
-        return get(appUser.getId());
+        return findById(appUser.getId());
     }
 
     @Transactional
-    @Override
     public boolean delete(long id) {
-        sessionFactory.getCurrentSession().delete(get(id));
+        sessionFactory.getCurrentSession().delete(findById(id));
         return true;
     }
 }

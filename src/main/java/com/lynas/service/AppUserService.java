@@ -6,13 +6,13 @@ import com.lynas.model.AppUser;
  * Created by LynAs on 20-Mar-16
  */
 public interface AppUserService {
-    AppUser loadUserByUsername(String username);
+    AppUser findById(long id);
 
-    long post(AppUser appUser);
+    AppUser findByUsername(String username);
 
-    AppUser get(long id);
+    long create(AppUser appUser);
 
-    AppUser patch(AppUser appUser);
+    AppUser update(AppUser appUser);
 
     boolean delete(long id);
 }
