@@ -22,7 +22,7 @@ class AuthenticationController(val authenticationManager: AuthenticationManager,
                                val  tokenUtils: TokenUtils,
                                val  userDetailsService: UserDetailsService) {
     @RequestMapping(method = [RequestMethod.POST])
-    fun authenticationRequest(@RequestBody authenticationRequest: AuthenticationRequest): AuthenticationResponse {
+    fun authenticationRequest(@RequestBody authenticationRequest: AuthenticationRequest): String {
 
         // Perform the authentication
         val authentication = this.authenticationManager.authenticate(
@@ -35,9 +35,6 @@ class AuthenticationController(val authenticationManager: AuthenticationManager,
 
         // Reload password post-authentication so we can generate token
         val userDetails = this.userDetailsService.loadUserByUsername(authenticationRequest.username)
-        val token = this.tokenUtils.generateToken(userDetails)
-
-        // Return the token
-        return AuthenticationResponse(token)
+        return this.tokenUtils.generateToken(userDetails)
     }
 }

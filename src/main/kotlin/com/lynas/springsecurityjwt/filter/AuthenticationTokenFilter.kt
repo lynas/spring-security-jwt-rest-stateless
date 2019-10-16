@@ -38,15 +38,7 @@ class AuthenticationTokenFilter : UsernamePasswordAuthenticationFilter() {
         resp.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, " + AppConstant.tokenHeader)
 
         val httpRequest = request as HttpServletRequest
-        if (!httpRequest.requestURI.startsWith("/auth")
-                && !httpRequest.requestURI.startsWith("/swagger-ui.html")
-                && !httpRequest.requestURI.startsWith("/swagger-resources")
-                && !httpRequest.requestURI.startsWith("/v2/")
-                && !httpRequest.requestURI.startsWith("/csrf")
-                && !httpRequest.requestURI.startsWith("/webjars")
-                && httpRequest.requestURI != "/"
-                && httpRequest.requestURI != "/error"
-        ) {
+        httpRequest.getHeader(AppConstant.tokenHeader)?.let{
             val authToken = httpRequest.getHeader(AppConstant.tokenHeader)
             val username = this.tokenUtils.getUsernameFromToken(authToken)
 
