@@ -1,4 +1,4 @@
-package com.lynas.springsecurityjwt
+package com.lynas.springsecurityjwt.util
 
 import com.lynas.springsecurityjwt.service.SpringSecurityUser
 import io.jsonwebtoken.Jwts

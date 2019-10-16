@@ -1,4 +1,4 @@
-package com.lynas.springsecurityjwt
+package com.lynas.springsecurityjwt.model
 
 import javax.persistence.Column
 import javax.persistence.Entity

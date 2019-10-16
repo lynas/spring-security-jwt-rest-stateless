@@ -1,13 +1,10 @@
 package com.lynas.springsecurityjwt.controller
 
-import com.lynas.springsecurityjwt.TokenUtils
+import com.lynas.springsecurityjwt.util.TokenUtils
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import com.lynas.springsecurityjwt.dto.AuthenticationResponse
-import org.springframework.http.ResponseEntity
-import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import com.lynas.springsecurityjwt.dto.AuthenticationRequest

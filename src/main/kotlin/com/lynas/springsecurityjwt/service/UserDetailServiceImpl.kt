@@ -1,6 +1,6 @@
 package com.lynas.springsecurityjwt.service
 
-import com.lynas.springsecurityjwt.AppUserRepository
+import com.lynas.springsecurityjwt.repository.AppUserRepository
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.AuthorityUtils
 import org.springframework.security.core.userdetails.UserDetails
@@ -19,7 +19,7 @@ class UserDetailServiceImpl(val appUserRepository: AppUserRepository) : UserDeta
                     appUserPassword = it.password,
                     authorities = it.authorities
             )
-        } ?: throw UsernameNotFoundException(String.format("No User found with username: $username"));
+        } ?: throw UsernameNotFoundException(String.format("No User found with username: $username"))
     }
 }
 

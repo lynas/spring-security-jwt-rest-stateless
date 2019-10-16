@@ -1,7 +1,7 @@
-package com.lynas.springsecurityjwt.filter
+package com.lynas.springsecurityjwt.config.filter
 
-import com.lynas.springsecurityjwt.AppConstant
-import com.lynas.springsecurityjwt.TokenUtils
+import com.lynas.springsecurityjwt.util.AppConstant
+import com.lynas.springsecurityjwt.util.TokenUtils
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.UserDetailsService

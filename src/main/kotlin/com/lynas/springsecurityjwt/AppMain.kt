@@ -1,15 +1,13 @@
 package com.lynas.springsecurityjwt
 
-import com.lynas.springsecurityjwt.dto.SuccessResponse
+import com.lynas.springsecurityjwt.model.AppUser
+import com.lynas.springsecurityjwt.repository.AppUserRepository
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
-import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
 import springfox.documentation.annotations.ApiIgnore
 import springfox.documentation.builders.ParameterBuilder
 import springfox.documentation.builders.PathSelectors
@@ -26,7 +24,7 @@ import java.util.*
 
 @SpringBootApplication
 @EnableSwagger2
-class SpringSecurityJwtApplication {
+class AppMain {
 
     @Bean
     fun init(appUserRepository: AppUserRepository) = CommandLineRunner {
@@ -65,7 +63,7 @@ class SpringSecurityJwtApplication {
 }
 
 fun main(args: Array<String>) {
-    runApplication<SpringSecurityJwtApplication>(*args)
+    runApplication<AppMain>(*args)
 }
 
 @Controller
