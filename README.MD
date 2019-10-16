@@ -20,13 +20,13 @@ CURL example
 ```
 curl -X POST "http://localhost:8080/auth" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"username\": \"lynas\", \"password\": \"123456\"}"
 ```
-you will get result
+### You will get result as following
 
 ```
 eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJseW5hcyIsImF1ZGllbmNlIjoid2ViIiwiY3JlYXRlZCI6MTU3MTIxMzc1MTEyMywi......
 ```
 
-# Make get call with header Authorization to get protected resource
+### Make get call with header Authorization to get protected resource
 
 http://localhost:8080/protected
 
