@@ -6,7 +6,7 @@ From application root run
 ./gradlew bootRun
 ```
 
-# Make post call 
+### Make post call for getting Authorization token
 http://localhost:8080/auth
 with body
 
@@ -26,7 +26,7 @@ you will get result
 eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJseW5hcyIsImF1ZGllbmNlIjoid2ViIiwiY3JlYXRlZCI6MTU3MTIxMzc1MTEyMywi......
 ```
 
-#make get call with header Authorization
+# Make get call with header Authorization to get protected resource
 
 http://localhost:8080/protected
 
