@@ -76,14 +76,3 @@ class HomeController {
         return "redirect:swagger-ui.html"
     }
 }
-
-@RestController
-@RequestMapping("/protected")
-class ProtectedController {
-
-    @GetMapping
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    fun hello() = SuccessResponse(true)
-
-
-}
