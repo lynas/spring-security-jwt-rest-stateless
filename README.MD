@@ -1,12 +1,12 @@
 # Stateless web application with Spring MVC and Spring Security with JWT
 
-Run the application with following command
+Run the application with following command. 
 From application root run
 ```
 ./gradlew bootRun
 ```
 
-#make post call
+# Make post call 
 http://localhost:8080/auth
 with body
 
