@@ -69,6 +69,13 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .antMatchers("/auth/**").permitAll()
+                .antMatchers("/swagger-ui.html/**").permitAll()
+                .antMatchers("/swagger-resources/**").permitAll()
+                .antMatchers("/swagger-resources/configuration/ui/**").permitAll()
+                .antMatchers("/v2/**").permitAll()
+                .antMatchers("/csrf/**").permitAll()
+                .antMatchers("/webjars/**").permitAll()
+                .antMatchers("/").permitAll()
                 .anyRequest().authenticated()
 
         httpSecurity
