@@ -1,16 +1,21 @@
-#Spring MVC stateless with security using jwt
+# Spring MVC stateless with security using jwt
 
-first create db demorest
+first create database name `demorest`
 
-run app
+Run app
 
-#run following command in db 
+### run following command in db 
+
+```
 INSERT INTO appuser (authorities, password, username) 
 VALUES ('ROLE_ADMIN, ROLE_EM PLOYEE, ROLE_MANAGER', '$2a$10$aS/lF2c/9JWPUjDHfJ/zTed1ihGBgfX/7xnGTOM5/lW59X4FHalSi', 'lynas');
+```
 
-#make post call
+### Make post call at following url
+
 http://localhost:8080/auth
-with body
+
+### with body
 
 ```
 { 
@@ -18,7 +23,7 @@ with body
   "password" : "123456"
 }
 ```
-you will get result
+### You will get result as following
 
 ```
 {
@@ -26,7 +31,7 @@ you will get result
 }
 ```
 
-#make get call with header X-Auth-Token
+### Make get call with header X-Auth-Token
 
 http://localhost:8080/protected
 
