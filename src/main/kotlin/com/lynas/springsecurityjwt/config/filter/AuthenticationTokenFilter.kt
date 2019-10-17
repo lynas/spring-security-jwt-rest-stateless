@@ -1,6 +1,6 @@
 package com.lynas.springsecurityjwt.config.filter
 
-import com.lynas.springsecurityjwt.util.AppConstant
+import com.lynas.springsecurityjwt.util.TOKEN_HEADER
 import com.lynas.springsecurityjwt.util.TokenUtils
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.context.SecurityContextHolder
@@ -35,11 +35,11 @@ class AuthenticationTokenFilter : UsernamePasswordAuthenticationFilter() {
         resp.setHeader("Access-Control-Allow-Origin", "*")
         resp.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE, PATCH")
         resp.setHeader("Access-Control-Max-Age", "3600")
-        resp.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, " + AppConstant.tokenHeader)
+        resp.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, $TOKEN_HEADER")
 
         val httpRequest = request as HttpServletRequest
-        httpRequest.getHeader(AppConstant.tokenHeader)?.let{
-            val authToken = httpRequest.getHeader(AppConstant.tokenHeader)
+        httpRequest.getHeader(TOKEN_HEADER)?.let {
+            val authToken = httpRequest.getHeader(TOKEN_HEADER)
             try {
                 val username = this.tokenUtils.getUsernameFromToken(authToken)
 
