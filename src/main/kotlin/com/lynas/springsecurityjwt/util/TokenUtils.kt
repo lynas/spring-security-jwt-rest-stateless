@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component
 import java.util.*
 import java.util.stream.Collectors
 
-
 @Component
 class TokenUtils {
 
@@ -34,10 +33,9 @@ class TokenUtils {
     fun getUserDetailsFromToken(token: String): UserDetails {
         return SpringSecurityUserDTO(
                 getUsernameFromToken(token),
-                getClaimsFromToken(token)["code"] as String,
+                "",
                 getClaimsFromToken(token)["authorities"] as String)
     }
-
 
     fun getExpirationDateFromToken(token: String) = getClaimsFromToken(token).expiration
             ?: throw RuntimeException("Unable to parse expiration date from token string")
@@ -48,7 +46,6 @@ class TokenUtils {
     fun generateToken(userDetails: UserDetails): String {
         val claims = HashMap<String, Any>()
         claims["sub"] = userDetails.username
-        claims["code"] = userDetails.password
         claims["audience"] = "web"
         claims["created"] = Date()
         claims["authorities"] = userDetails.authorities.stream().map { it.authority }.collect(Collectors.joining(","))

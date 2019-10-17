@@ -17,7 +17,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.web.AuthenticationEntryPoint
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
-
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -25,11 +24,11 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
 
     @field:Autowired
     lateinit var authenticationEntryPoint: AuthenticationEntryPoint
+
     @field:Autowired
     lateinit var userDetailsService: UserDetailsService
 
     @Autowired
-    @Throws(Exception::class)
     fun configureAuthentication(authenticationManagerBuilder: AuthenticationManagerBuilder) {
         authenticationManagerBuilder
                 .userDetailsService<UserDetailsService>(userDetailsService)
@@ -37,20 +36,17 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
     }
 
     @Bean
-    @Throws(Exception::class)
     override fun authenticationManagerBean(): AuthenticationManager {
         return super.authenticationManagerBean()
     }
 
     @Bean
-    @Throws(Exception::class)
     fun authenticationTokenFilterBean(): AuthenticationTokenFilter {
         return AuthenticationTokenFilter().apply {
             setAuthenticationManager(super.authenticationManagerBean())
         }
     }
 
-    @Throws(Exception::class)
     override fun configure(httpSecurity: HttpSecurity) {
         httpSecurity
                 .csrf()
@@ -72,8 +68,7 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
                 .antMatchers("/webjars/**").permitAll()
                 .antMatchers("/").permitAll()
                 .anyRequest().authenticated()
-
-        httpSecurity
+                .and()
                 .addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter::class.java)
     }
 

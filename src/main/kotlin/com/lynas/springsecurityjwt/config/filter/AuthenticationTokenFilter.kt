@@ -16,14 +16,15 @@ import javax.servlet.ServletResponse
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-
 class AuthenticationTokenFilter : UsernamePasswordAuthenticationFilter() {
 
     lateinit var userDetailsService: UserDetailsService
+
     lateinit var tokenUtils: TokenUtils
 
     @Throws(IOException::class, ServletException::class)
     override fun doFilter(request: ServletRequest, response: ServletResponse, chain: FilterChain) {
+
         tokenUtils = WebApplicationContextUtils
                 .getRequiredWebApplicationContext(this.servletContext)
                 .getBean(TokenUtils::class.java)

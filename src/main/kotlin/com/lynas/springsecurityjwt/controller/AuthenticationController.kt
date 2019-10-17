@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController
 class AuthenticationController(val authenticationManager: AuthenticationManager,
                                val  tokenUtils: TokenUtils,
                                val  userDetailsService: UserDetailsService) {
+
     @RequestMapping(method = [RequestMethod.POST])
     fun authenticationRequest(@RequestBody authenticationRequest: AuthenticationRequest): String {
 
@@ -29,8 +30,9 @@ class AuthenticationController(val authenticationManager: AuthenticationManager,
         )
         SecurityContextHolder.getContext().authentication = authentication
 
-        // Reload password post-authentication so we can generate token
+        // Reload userDetails post-authentication so we can generate token
         val userDetails = this.userDetailsService.loadUserByUsername(authenticationRequest.username)
         return this.tokenUtils.generateToken(userDetails)
     }
+
 }

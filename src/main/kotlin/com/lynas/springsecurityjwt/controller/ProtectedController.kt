@@ -14,5 +14,4 @@ class ProtectedController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     fun hello() = SuccessResponse(true)
 
-
 }

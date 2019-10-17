@@ -9,6 +9,7 @@ data class SpringSecurityUserDTO(
         val appUserPassword: String,
         val authorities: String
 ) : UserDetails {
+
     override fun getUsername(): String {
         return appUsername
     }

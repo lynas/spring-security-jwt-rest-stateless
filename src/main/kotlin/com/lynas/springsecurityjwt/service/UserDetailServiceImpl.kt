@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service
 
 @Service("userDetailsService")
 class UserDetailServiceImpl(val appUserRepository: AppUserRepository) : UserDetailsService {
+
     override fun loadUserByUsername(username: String): UserDetails {
         appUserRepository.findByUsername(username)?.let {
             return SpringSecurityUserDTO(
@@ -18,5 +19,6 @@ class UserDetailServiceImpl(val appUserRepository: AppUserRepository) : UserDeta
             )
         } ?: throw UsernameNotFoundException(String.format("No User found with username: $username"))
     }
+
 }
 

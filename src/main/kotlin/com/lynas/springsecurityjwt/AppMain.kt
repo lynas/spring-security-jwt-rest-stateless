@@ -21,7 +21,6 @@ import springfox.documentation.spring.web.plugins.Docket
 import springfox.documentation.swagger2.annotations.EnableSwagger2
 import java.util.*
 
-
 @SpringBootApplication
 @EnableSwagger2
 class AppMain {
@@ -32,7 +31,7 @@ class AppMain {
                 id = null,
                 username = "lynas",
                 password = "\$2a\$10\$aS/lF2c/9JWPUjDHfJ/zTed1ihGBgfX/7xnGTOM5/lW59X4FHalSi",
-                authorities = "ROLE_ADMIN, ROLE_EM PLOYEE, ROLE_MANAGER"))
+                authorities = "ROLE_ADMIN, ROLE_EMPLOYEE, ROLE_MANAGER"))
     }
 
     @Bean
@@ -60,6 +59,7 @@ class AppMain {
                 "A stateless web application with Spring security & Jwt",
                 "1.0", "", Contact("", "", ""), "", "", listOf())
     }
+
 }
 
 fun main(args: Array<String>) {
@@ -69,8 +69,10 @@ fun main(args: Array<String>) {
 @Controller
 @ApiIgnore
 class HomeController {
+
     @RequestMapping("/")
     fun index(): String {
         return "redirect:swagger-ui.html"
     }
+
 }
