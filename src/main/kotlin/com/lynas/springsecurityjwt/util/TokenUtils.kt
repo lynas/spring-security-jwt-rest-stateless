@@ -1,11 +1,13 @@
 package com.lynas.springsecurityjwt.util
 
 import com.lynas.springsecurityjwt.dto.SpringSecurityUserDTO
+import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Component
 import java.util.*
+import java.util.stream.Collectors
 
 
 @Component
@@ -18,16 +20,22 @@ class TokenUtils {
     fun getUsernameFromToken(token: String) = getClaimsFromToken(token).subject
             ?: throw RuntimeException("Unable to get username from token String")
 
-    private fun getClaimsFromToken(token: String) = Jwts.parser()
+    private fun getClaimsFromToken(token: String): Claims = Jwts.parser()
             .setSigningKey(this.secret)
             .parseClaimsJws(token)
             .body ?: throw RuntimeException("Unable to parse claim from token string")
 
-    fun validateToken(token: String, userDetails: UserDetails): Boolean {
-        val user = userDetails as SpringSecurityUserDTO
-        val username = this.getUsernameFromToken(token)
-        return (username == user.username
-                && !this.isTokenExpired(token))
+    fun validateToken(token: String) {
+        if (this.isTokenExpired(token)) {
+            throw java.lang.RuntimeException("Token expired")
+        }
+    }
+
+    fun getUserDetailsFromToken(token: String): UserDetails {
+        return SpringSecurityUserDTO(
+                getUsernameFromToken(token),
+                getClaimsFromToken(token)["code"] as String,
+                getClaimsFromToken(token)["authorities"] as String)
     }
 
 
@@ -40,8 +48,10 @@ class TokenUtils {
     fun generateToken(userDetails: UserDetails): String {
         val claims = HashMap<String, Any>()
         claims["sub"] = userDetails.username
+        claims["code"] = userDetails.password
         claims["audience"] = "web"
         claims["created"] = Date()
+        claims["authorities"] = userDetails.authorities.stream().map { it.authority }.collect(Collectors.joining(","))
         return this.generateToken(claims)
     }
 

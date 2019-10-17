@@ -5,7 +5,6 @@ import org.springframework.security.core.authority.AuthorityUtils
 import org.springframework.security.core.userdetails.UserDetails
 
 data class SpringSecurityUserDTO(
-        val id: Long,
         val appUsername: String,
         val appUserPassword: String,
         val authorities: String

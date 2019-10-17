@@ -12,7 +12,6 @@ class UserDetailServiceImpl(val appUserRepository: AppUserRepository) : UserDeta
     override fun loadUserByUsername(username: String): UserDetails {
         appUserRepository.findByUsername(username)?.let {
             return SpringSecurityUserDTO(
-                    id= it.id ?: throw RuntimeException("ID in table must not be null"),
                     appUsername = it.username,
                     appUserPassword = it.password,
                     authorities = it.authorities

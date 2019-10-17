@@ -41,20 +41,14 @@ class AuthenticationTokenFilter : UsernamePasswordAuthenticationFilter() {
         httpRequest.getHeader(TOKEN_HEADER)?.let {
             val authToken = httpRequest.getHeader(TOKEN_HEADER)
             try {
-                val username = this.tokenUtils.getUsernameFromToken(authToken)
-
-                if (SecurityContextHolder.getContext().authentication == null) {
-                    val userDetails = this.userDetailsService.loadUserByUsername(username)
-                    if (this.tokenUtils.validateToken(authToken, userDetails)) {
-                        val authentication = UsernamePasswordAuthenticationToken(userDetails, null, userDetails.authorities)
-                        authentication.details = WebAuthenticationDetailsSource().buildDetails(httpRequest)
-                        SecurityContextHolder.getContext().authentication = authentication
-                    }
-                }
+                tokenUtils.validateToken(authToken)
+                val userDetails = tokenUtils.getUserDetailsFromToken(authToken)
+                val authentication = UsernamePasswordAuthenticationToken(userDetails, null, userDetails.authorities)
+                authentication.details = WebAuthenticationDetailsSource().buildDetails(httpRequest)
+                SecurityContextHolder.getContext().authentication = authentication
             } catch (e: Exception) {
                 e.printStackTrace()
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "The token is not valid.")
-
             }
         }
         chain.doFilter(request, response)
