@@ -1,14 +1,11 @@
 package com.lynas.springsecurityjwt.util
 
-import com.lynas.springsecurityjwt.service.SpringSecurityUser
+import com.lynas.springsecurityjwt.dto.SpringSecurityUserDTO
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Component
 import java.util.*
-import java.util.HashMap
-
-
 
 
 @Component
@@ -27,7 +24,7 @@ class TokenUtils {
             .body ?: throw RuntimeException("Unable to parse claim from token string")
 
     fun validateToken(token: String, userDetails: UserDetails): Boolean {
-        val user = userDetails as SpringSecurityUser
+        val user = userDetails as SpringSecurityUserDTO
         val username = this.getUsernameFromToken(token)
         return (username == user.username
                 && !this.isTokenExpired(token))
