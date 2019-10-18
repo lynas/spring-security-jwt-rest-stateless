@@ -4,7 +4,6 @@ import com.lynas.springsecurityjwt.util.TOKEN_HEADER
 import com.lynas.springsecurityjwt.util.TokenUtils
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.context.SecurityContextHolder
-import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource
 import org.springframework.web.context.support.WebApplicationContextUtils
@@ -16,8 +15,6 @@ import javax.servlet.http.HttpServletResponse
 
 class AuthenticationTokenFilter : UsernamePasswordAuthenticationFilter() {
 
-    lateinit var userDetailsService: UserDetailsService
-
     lateinit var tokenUtils: TokenUtils
 
     override fun doFilter(request: ServletRequest, response: ServletResponse, chain: FilterChain) {
@@ -25,9 +22,6 @@ class AuthenticationTokenFilter : UsernamePasswordAuthenticationFilter() {
         tokenUtils = WebApplicationContextUtils
                 .getRequiredWebApplicationContext(this.servletContext)
                 .getBean(TokenUtils::class.java)
-        userDetailsService = WebApplicationContextUtils
-                .getRequiredWebApplicationContext(this.servletContext)
-                .getBean(UserDetailsService::class.java)
 
         val resp = response as HttpServletResponse
         resp.setHeader("Access-Control-Allow-Origin", "*")
