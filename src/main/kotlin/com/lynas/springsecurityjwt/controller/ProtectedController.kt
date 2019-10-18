@@ -12,6 +12,6 @@ class ProtectedController {
 
     @GetMapping
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    fun hello() = SuccessResponse(true)
+    fun protectedResource() = SuccessResponse(true)
 
 }
